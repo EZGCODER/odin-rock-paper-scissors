@@ -1,3 +1,5 @@
+
+// GAME ROCK PAPER SCISSORS
 // Computer chooses rock paper scissors
 function getRandomIntInclusive(min, max) {
   const minCeiled = Math.ceil(min);
@@ -9,7 +11,7 @@ function getComputerChoice() {
     let choice = getRandomIntInclusive(1, 3);
     return choice;
 }
-
+// for now input from user is 1 2 3 because i plan on using buttons so i dont need to deal with strings
 function getHumanChoice() {
     return parseInt(prompt("Rock paper scissors"));
 }
@@ -20,33 +22,44 @@ let computerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
-        return;
+        return false;
     } else if (humanChoice === 1 && computerChoice === 3 ||
     humanChoice === 2 && computerChoice === 1 ||
     humanChoice === 3 && computerChoice === 2) {
         humanScore += 1;
+        return true;
     } else {
         computerScore += 1;
+        return true;
     }
 }
 
 function playGame(numberOfRounds = 5) {
-    let i = 1;
-    do {
+    let i = 0;
+    while (i < numberOfRounds) {
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-        console.log("Round " + i)
-        console.log("Human " + humanScore)
-        console.log("Computer " + computerScore)
-        i++;
-    } while (i < numberOfRounds);
+
+        const gameCounts = playRound(humanSelection, computerSelection);
+
+        if (gameCounts === false) {
+            console.log("Tie");
+        } else {
+            i++; // only increment on decisive rounds
+            console.log("Round " + i);
+            console.log("Human " + humanScore);
+            console.log("Computer " + computerScore);
+        }
+    } 
+
     if (humanScore > computerScore) {
-        alert("human wins")
+        alert("human wins");
     } else {
-        alert("computer wins")
+        alert("computer wins");
     }
 }
 
+
 playGame()
 
+//LATER GUI
