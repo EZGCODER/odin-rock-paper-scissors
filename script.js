@@ -1,4 +1,4 @@
-
+// Computer chooses rock paper scissors
 function getRandomIntInclusive(min, max) {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
@@ -11,11 +11,12 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    return prompt("Rock paper scissors");
+    return parseInt(prompt("Rock paper scissors"));
 }
 
 let humanScore = 0;
 let computerScore = 0;
+
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
@@ -29,18 +30,22 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
 function playGame(numberOfRounds = 5) {
- 
-    let i = 0;
+    let i = 1;
     do {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
         playRound(humanSelection, computerSelection);
-        i++;
+        console.log("Round " + i)
         console.log("Human " + humanScore)
         console.log("Computer " + computerScore)
+        i++;
     } while (i < numberOfRounds);
+    if (humanScore > computerScore) {
+        alert("human wins")
+    } else {
+        alert("computer wins")
+    }
 }
 
 playGame()
